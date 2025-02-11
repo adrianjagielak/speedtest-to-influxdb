@@ -1,0 +1,17 @@
+{
+  "name": "speedtest-to-influxdb",
+  "version": "1.0.0",
+  "description": "A Node.js script that runs an internet speed test every 30 minutes and logs the results to an InfluxDB database.",
+  "main": "speedtest-to-influxdb.js",
+  "scripts": {
+    "start": "node speedtest-to-influxdb.js"
+  },
+  "dependencies": {
+    "@influxdata/influxdb-client": "^1.35.0",
+    "node-cron": "^3.0.3",
+    "speedtest-net": "https://github.com/adrianjagielak/speedtest.net"
+  },
+  "keywords": ["speedtest", "influxdb", "cron", "network", "monitoring"],
+  "author": "adrianjagielak",
+  "license": "UNLICENSED"
+}
