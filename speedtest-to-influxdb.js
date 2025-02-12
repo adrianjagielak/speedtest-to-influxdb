@@ -35,8 +35,8 @@ async function runSpeedTest() {
 
     // Create an InfluxDB data point
     const point = new Point(INFLUX_MEASUREMENT_NAME)
-      .tag("isp", isp)
-      .tag("server", serverName)
+      .stringField("isp", isp)
+      .stringField("server", serverName)
       .floatField("download_speed_mbps", downloadSpeed)
       .floatField("upload_speed_mbps", uploadSpeed)
       .floatField("ping_ms", ping)
@@ -49,6 +49,24 @@ async function runSpeedTest() {
     console.log(`[${new Date().toISOString()}] Data written to InfluxDB`);
   } catch (error) {
     console.error("Error running speed test:", error);
+
+    try {
+      const point = new Point(INFLUX_MEASUREMENT_NAME)
+        .stringField("isp", "none")
+        .stringField("server", "none")
+        .floatField("download_speed_mbps", 0)
+        .floatField("upload_speed_mbps", 0)
+        .floatField("ping_ms", 0)
+        .floatField("jitter_ms", 0);
+
+      writeApi.writePoint(point);
+      await writeApi.flush();
+      console.log(
+        `[${new Date().toISOString()}] Empty data written to InfluxDB`,
+      );
+    } catch (error) {
+      console.error("Error writing empty data to InfluxDB:", error);
+    }
   }
 }
 
