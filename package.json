@@ -1,6 +1,6 @@
 {
   "name": "speedtest-to-influxdb",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A Node.js script that runs an internet speed test every 30 minutes and logs the results to an InfluxDB database.",
   "type": "module",
   "main": "speedtest-to-influxdb.js",
